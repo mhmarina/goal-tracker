@@ -4,37 +4,27 @@ import {  StyleSheet,
           Button, 
           TextInput, 
           ScrollView, 
-          FlatList} from 'react-native';
-
+          FlatList} from 'react-native';          
+import GoalItem from './containers/GoalItem';
+import GoalInput from './containers/GoalInput';
 import {useState} from 'react';
 
 export default function App() {
 
-  const [enteredText, setText] = useState('');
   const [goals, setGoals] = useState([]);
 
-  function goalInputHandler(text){
-    setText(text);
-  }
-
-  function addGoalHandler(){
+  function addGoalHandler(enteredText){
     setGoals((currentGoals) => 
       [...currentGoals, enteredText])
   }
 
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput 
-                  style={styles.textInput} placeholder="what's your next goal...?"
-                  placeholderTextColor= '#7a676a' 
-                  onChangeText={goalInputHandler}/>
-        <Button 
-          title="Add Goal" onPress={addGoalHandler}/>
-      </View>
+      <GoalInput 
+          onAddGoal = {addGoalHandler}/>
       <View  style={styles.goalsContainer}>
           <FlatList data={goals} renderItem={itemData => 
-            {return(<Text style={styles.goalItem}>{itemData.item}</Text>)
+            {return(<GoalItem text = {itemData.item} />)
             }}/>
       </View>
     </View>
@@ -48,32 +38,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: '#211b1c',
   },
-  inputContainer: {
-    flexDirection: 'row',
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: 'white',
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: 'white',
-    color: '#ff6188',
-    width: '70%%',
-    marginRight: 8,
-    padding: 8,
-  },
   goalsContainer: {
     flex: 10,
   },
-  goalItem: {
-    marginBottom: 10,
-    backgroundColor: '#ff6188',
-    padding: 8,
-  },
-  addButton: {
-    backgroundColor: '#ff6188',
-  }
 });
