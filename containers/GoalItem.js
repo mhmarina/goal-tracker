@@ -1,14 +1,16 @@
 import {  StyleSheet, 
     Text, 
     View, 
-    Button, 
-    TextInput, 
-    ScrollView, 
-    FlatList} from 'react-native';
+    Pressable,} from 'react-native';
 
 export default function GoalItem(props){
     return(
-        <Text style={styles.goalItem}>{props.text}</Text>
+        <Pressable onPress = {props.onDelete.bind(this, props.id)}
+                    style = {({pressed}) => pressed && styles.pressedItem}>
+            <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{props.text}</Text>
+            </View>
+        </Pressable>
     )
 }
 
@@ -17,6 +19,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         backgroundColor: '#ff6188',
         padding: 8,
+      },
+      pressedItem: {
+        opacity: 0.5,
+      },
+      goalText: {
+        color: 'black',
       },
       addButton: {
         backgroundColor: '#ff6188',

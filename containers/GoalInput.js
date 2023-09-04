@@ -1,10 +1,9 @@
-import {  StyleSheet, 
-    Text, 
+import {  StyleSheet,  
     View, 
     Button, 
-    TextInput, 
-    ScrollView, 
-    FlatList} from 'react-native';
+    Modal,
+    Image,
+    TextInput,} from 'react-native';
 import {useState} from 'react';
 
 export default function GoalInput(props){
@@ -13,6 +12,7 @@ export default function GoalInput(props){
 
     function addGoalHandler(){
         props.onAddGoal(enteredText);
+        props.onClose();
         setText('');
     }
 
@@ -21,34 +21,50 @@ export default function GoalInput(props){
       }
     
     return(
-        <View style={styles.inputContainer}>
-            <TextInput 
-                    style={styles.textInput} placeholder="what's your next goal...?"
-                    placeholderTextColor= '#7a676a' 
-                    onChangeText={goalInputHandler}
-                    value={enteredText}/>
-            <Button 
-            title="Add Goal" onPress={addGoalHandler}/>
-        </View>
+        <Modal animationType='slide' visible ={props.visible}>
+            <View style={styles.inputContainer}>
+                <View style={styles.textInput} >
+                    <TextInput 
+                            placeholder="what's your next goal...?"
+                            placeholderTextColor= '#7a676a' 
+                            onChangeText={goalInputHandler}
+                            value={enteredText}/>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <View style={styles.button}>
+                        <Button title="Add Goal" onPress={addGoalHandler} color="#ed6d7c"/>
+                    </View>
+                    <View style={styles.button}>
+                        <Button title="Cancel" color="#ed6d7c" onPress={props.onClose}/>
+                    </View>
+                </View>
+            </View>
+        </Modal>
     );
 }
 
 const styles = StyleSheet.create({
     inputContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         flex: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 24,
-        borderBottomWidth: 1,
-        borderBottomColor: 'white',
       },
       textInput: {
         borderWidth: 1,
-        borderColor: 'white',
-        color: '#ff6188',
-        width: '70%%',
+        borderColor: '#211b1c',
+        color: '#211b1c',
+        width: '90%',
         marginRight: 8,
         padding: 8,
       },
+      buttonContainer: {
+        flexDirection: "row",
+        alignContent: 'space-between'
+      },
+      button: {
+        width: '30%',
+        marginHorizontal: 8
+      }
 })
