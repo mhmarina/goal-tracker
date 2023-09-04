@@ -32,7 +32,9 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <Button title="Add new goal" onPress={startAdd} color="#ed6d7c"/>
+      <View style={styles.addButton}>
+        <Button title="Add new goal" onPress={startAdd} color="#ed6d7c"/>
+      </View>
       {modalIsVisible && 
           <GoalInput 
           onAddGoal = {addGoalHandler}
@@ -59,5 +61,8 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 10,
+  },
+  addButton: {
+    margin: 20,
   },
 });

@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
       },
       goalText: {
         color: 'black',
+        fontSize: 20,
       },
       addButton: {
         backgroundColor: '#ff6188',
