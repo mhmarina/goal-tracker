@@ -1,5 +1,7 @@
 # goal-tracker
 Mobile app used to add and delete goals. Created using React Native
+run:
+npm start
 
 # screenshots:
 ![IMG_6428](https://github.com/mhmarina/goal-tracker/assets/140115877/11c1643a-011c-4208-be21-e9f1c9a09e6a)
